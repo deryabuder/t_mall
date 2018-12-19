@@ -201,6 +201,7 @@ export default {
     checkedCount () {
       // 计算选中的商品的数据，如果为0，结算按钮变灰
       let i = 0
+      // cartList发生变化时，计算选中的商品个数，用来判断是否全选
       this.cartList.forEach(item => {
         if (item.checked === '1') {
           i++
@@ -226,7 +227,8 @@ export default {
     ...mapMutations({
       UPDATE_CART_COUNT: 'UPDATE_CART_COUNT'
     }),
-    // 重新获取购物车列表
+    // 获取购物车列表
+    // 会在mounted、删除购物车时执行
     init () {
       cartsList().then(response => {
         let res = response.data
@@ -283,6 +285,7 @@ export default {
     },
     // 如果购物车选中商品> 0, 则跳转到地址路由
     checkOut () {
+      // 如果购物车中选中的商品为0，则禁用按钮
       if (this.checkedCount > 0) {
         this.$router.push(
           {path: '/address'})

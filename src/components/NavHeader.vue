@@ -51,6 +51,7 @@
         </div>
         <div class="md-content">
           <div class="confirm-tips">
+            <!-- 错误提示 -->
             <div class="error-wrap">
               <span class="error error-show" v-show="errorTip">用户名或者密码错误</span>
             </div>
@@ -100,6 +101,7 @@ export default {
       SET_CART_COUNT: 'SET_CART_COUNT'
     }),
     login () {
+      // 缺少用户名或密码的话，添加错误提示
       if (!this.userName || !this.userPwd) {
         this.errorTip = true
         return false
@@ -120,6 +122,7 @@ export default {
       })
     },
     checkLogin () {
+      // mounted时检查登录状态
       checkLogin().then(response => {
         let res = response.data
         if (res.status === '200') {
@@ -137,6 +140,7 @@ export default {
       logout().then(response => {
         let res = response.data
         if (res.status === '200') {
+          // 管理状态
           this.SET_NICK_NAME('')
           this.SET_CART_COUNT(0)
         }
@@ -164,7 +168,9 @@ export default {
 
 .navbar {
   display: flex;
+  /* 内容分布在左右两边 */
   justify-content: space-between;
+  /* 内容分布在上下中间 */
   align-content: center;
   width: 100%;
   height: 70px;
@@ -175,6 +181,7 @@ export default {
 
 .navbar-left-container {
   display: flex;
+  /* 内容分布在左边 */
   justify-content: flex-start;
   align-items: center;
   margin-left: -20px;
@@ -197,12 +204,14 @@ a {
 
 .navbar-right-container {
   display: none;
+  /* 内容分布在左边 */
   justify-content: flex-start;
   align-items: center;
 }
 
 .navbar-menu-container {
   display: flex;
+  /* 内容分布在右边 */
   justify-content: flex-end;
   align-items: center;
   padding-top: 10px;
@@ -217,8 +226,8 @@ a {
 }
 
 .navbar-cart-count {
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   position: absolute;
   top: -9px;
   right: -11px;
@@ -234,6 +243,7 @@ a {
 .navbar-cart-logo {
   width: 25px;
   height: 25px;
+  /* 购物车镜像翻转 */
   transform: scaleX(-1);
 }
 </style>

@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
     next()// next不拦截,直接跳过
   } else {
     // 对所有接口进行底层的拦截
-    // 在用户未登录的情况下，后端只可以访问登录、登录、查看商品列表
+    // 在用户未登录的情况下，前端可以访问后端的接口和可以通过http://localhost:3000/访问的接口
     if (req.originalUrl === '/users/login' || req.originalUrl === '/users/logout' || req.path === '/goods/list') {
       next()
     } else {

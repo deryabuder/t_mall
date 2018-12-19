@@ -4,6 +4,7 @@ var User = require('./../models/user')
 require('../util/util')
 // 后端路由处理来自前端的请求，req是请求对象，res响应对象
 router.get('/', function (req, res, next) {
+  // 访问该一级路由返回的数据
   res.send('respond with a resource')
 })
 
@@ -52,8 +53,10 @@ router.post('/login', function (req, res, next) {
  * 登出接口
 */
 router.post('/logout', function (req, res, next) {
+  // 清除cookie
   res.cookie('userId', '', {
     path: '/',
+    // 如果设置为负值的话，则为浏览器进程Cookie(内存中保存)，关闭浏览器就失效；如果设置为0，则立即删除该Cookie。
     maxAge: -1
   })
   res.json({
@@ -264,6 +267,7 @@ router.get('/addressList', function (req, res, next) {
 router.post('/setDefault', function (req, res, next) {
   var userId = req.cookies.userId
   var addressId = req.body.addressId
+  // 先判断前端传来的addressId是否为空
   if (!addressId) {
     res.json({
       status: '1003',
@@ -271,6 +275,7 @@ router.post('/setDefault', function (req, res, next) {
       result: ''
     })
   } else {
+    // 查找用户
     User.findOne({userId: userId}, function (err, doc) {
       if (err) {
         res.json({
@@ -279,6 +284,7 @@ router.post('/setDefault', function (req, res, next) {
           result: ''
         })
       } else {
+        // 在用户的地址列表中匹配前端传来的addressId
         var addressList = doc.addressList
         addressList.forEach((item) => {
           if (item.addressId === addressId) {
@@ -287,7 +293,7 @@ router.post('/setDefault', function (req, res, next) {
             item.isDefault = false
           }
         })
-
+        // 保存对数据库的修改
         doc.save(function (err1, doc1) {
           if (err1) {
             res.json({
@@ -340,7 +346,7 @@ router.post('/delAddress', function (req, res, next) {
   })
 })
 /**
- * 支付成功后，添加订单信息到orderList中，并返回orderId和orderTotal
+ * 在订单确认页面，点击支付后，添加订单信息到orderList中，并返回orderId和orderTotal
  */
 router.post('/payMent', function (req, res, next) {
   var userId = req.cookies.userId
@@ -369,6 +375,7 @@ router.post('/payMent', function (req, res, next) {
         }
       })
 
+      // 生成orderId
       var platForm = '622'
       var r1 = Math.floor(Math.random() * 10)
       var r2 = Math.floor(Math.random() * 10)
@@ -387,7 +394,7 @@ router.post('/payMent', function (req, res, next) {
       }
 
       doc.orderList.push(order)
-
+      // 保存对数据库的修改
       doc.save(function (err1, doc1) {
         if (err1) {
           res.json({
@@ -413,10 +420,11 @@ router.post('/payMent', function (req, res, next) {
   })
 })
 
-// 根据订单Id查询订单信息
+// 订单成功页面mounted时，根据订单Id查询订单信息
 router.get('/orderDetail', function (req, res, next) {
   var userId = req.cookies.userId
   var orderId = req.param('orderId')
+  // 查找用户
   User.findOne({userId: userId}, function (err, userInfo) {
     if (err) {
       res.json({
@@ -426,6 +434,7 @@ router.get('/orderDetail', function (req, res, next) {
       })
     } else {
       var orderList = userInfo.orderList
+      // 订单列表不为空
       if (orderList.length > 0) {
         var orderTotal = -1
         orderList.forEach((item) => {
@@ -433,6 +442,7 @@ router.get('/orderDetail', function (req, res, next) {
             orderTotal = item.orderTotal
           }
         })
+        // 指定订单的总价大于0
         if (orderTotal >= 0) {
           res.json({
             status: '200',

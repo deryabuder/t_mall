@@ -89,7 +89,9 @@ th {
 }
 
 table {
+  /* 边框合并成单一边框 */
   border-collapse: collapse;
+  /* 设置相邻单元格的边框间的距离（仅用于"边框分离"模式）。 */
   border-spacing: 0;
 }
 
@@ -130,6 +132,7 @@ button {
 }
 
 button:disabled {
+  /* 按钮处于禁用状态 */
   cursor: default;
 }
 
@@ -155,7 +158,7 @@ img {
 :focus {
   outline: none;
 }
-
+/* html属性 */
 [hidden] {
   display: none;
 }
@@ -206,11 +209,6 @@ button:focus, button:active {
   outline: none;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -222,6 +220,7 @@ table {
   zoom: 1;
 }
 
+/* 媒体查询 打印 */
 @media print {
   body,
   #main,
@@ -339,6 +338,7 @@ table {
 }
 
 .text-uppercase {
+  /* 控制文本的大小写 */
   text-transform: uppercase;
 }
 
@@ -355,6 +355,7 @@ table {
 }
 
 .text-left {
+  /* 设置文本的对齐方式 */
   text-align: left;
 }
 
@@ -365,7 +366,7 @@ table {
 .text-right {
   text-align: right;
 }
-
+/* 手机平板设备 */
 @media only screen and (max-width: 991px) {
   .font-size-12 {
     font-size: 1.2rem;
@@ -435,6 +436,9 @@ a:hover {
   background: #f0f0f0;
 }
 
+.footer-secondary-nav, .footer-region {
+	text-align: center;
+}
 
 /** 面包屑 **/
 .nav-breadcrumb {
@@ -682,7 +686,7 @@ a:hover {
   height: 1px;
   background: #ee7a23;
 }
-
+/* 移除.open后旋转 */
 .i-up-down .i-up-down-l {
   left: 0;
   -webkit-transform: rotate(40deg);
@@ -795,8 +799,9 @@ a:hover {
 .up-down-btn.open {
   -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
-}
-
+ }
+/* .i-up-down-l是/,.i-up-down-r是\,两者呈交叉状，通过旋转展示不同的图标 */
+/* 添加.open时旋转 */
 .up-down-btn.open .i-up-down-l {
   -webkit-transform: rotate(-40deg);
   -ms-transform: rotate(-40deg);

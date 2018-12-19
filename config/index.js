@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    // 静态资源的 cdn 地址
+    // 如果在文件夹下部署项目的话，需要添加'/文件名',因为它是dist中加载静态文件的路径
     assetsPublicPath: '/',
     proxyTable: {},
 

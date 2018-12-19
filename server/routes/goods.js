@@ -17,18 +17,22 @@ mongoose.connection.on('disconnected', function () {
   console.log('Mongodb connected disconnected.')
 })
 
-// 查询商品列表(不登录也可以操作)
+// 查询商品列表(不登录也访问)
 router.get('/list', function (req, res, next) {
   // req.param()是express提供的方法，获取get请求查询参数的值
   // 当前的页数
   let page = parseInt(req.param('page'))
-  // 每页的数据
+  // 每页的数据条数
   let pageSize = parseInt(req.param('pageSize'))
+  // 价格分区
   let priceLevel = req.param('priceLevel')
+  // 价格升降序
   let sort = req.param('sort')
+  //  区间最低价
   var priceGt = ''
+  //  区间最高价
   let priceLte = ''
-  // 跳过几条数据
+  // 在数据库中跳过几条数据
   let skip = (page - 1) * pageSize
   let params = {}
 
@@ -51,7 +55,7 @@ router.get('/list', function (req, res, next) {
   // 跳过skip条数据，使用limit()方法来读取pageSize条数据（实现每次获取4条数据）
   let goodsModel = Goods.find(params).skip(skip).limit(pageSize) // 查找所有数据
   goodsModel.sort({'salePrice': sort}) // 1是升序,-1是降序
-  // 执行查询
+  // find()返回的是query，执行exec()返回promise
   goodsModel.exec({}, function (err, doc) {
     if (err) {
       res.json({
@@ -129,9 +133,11 @@ router.post('/addCart', function (req, res, next) {
                 // 只要将文档对象转换为Object对象即可，使用mongoose自带的Document.prototype.toObject()方法，
                 // 或者使用JSON.stringify()方法，将doc转换为Object对象。
                 var obj = product.toObject()
+                // 执行添加属性操作时，将doc类型转换成对象类型
                 obj.productNum = 1
                 obj.checked = 1
                 user.cartList.push(obj)
+                // 添加商品到购物车后，goods集合中的购物车信心就会更新
                 user.save(function (err, doc) {
                   if (err) {
                     res.json({

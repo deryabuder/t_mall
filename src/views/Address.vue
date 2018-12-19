@@ -161,7 +161,7 @@ export default {
       limit: 3,
       // 默认地址的index
       checkIndex: 0,
-      // 默认地址的id
+      // 选中的地址id
       selectedAddrId: '',
       // 地址列表
       addressList: [],
@@ -176,12 +176,14 @@ export default {
   },
   computed: {
     addressListFilter () {
-      // limit改变时，就重新计算
+      // limit或addressList改变时，就重新计算
       return this.addressList.slice(0, this.limit)
     }
   },
   methods: {
     init () {
+      // 从数据库中获取地址列表，并查找默认地址的id和index
+      // 在删除地址或修改默认地址时，再次调用该函数，并选中默认地址
       addressList().then((response) => {
         var res = response.data
         this.addressList = res.result

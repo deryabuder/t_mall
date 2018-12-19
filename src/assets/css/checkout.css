@@ -953,6 +953,7 @@ html {
 }
 
 .price-count ul {
+  /* 列表宽度百分百 */
   display: table;
   width: 100%;
 }
@@ -975,6 +976,7 @@ html {
 }
 
 .price-count li span:last-child {
+  /* 每行最后一个单元格宽度固定 */
   width: 20px;
   padding-left: 10px;
   white-space: nowrap;

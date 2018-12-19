@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
-// Mongoose中的一切都是由Schema开始的。每一个schema都映射到一个Mongodb的collection
+// Mongoose中的一切都是由Schema开始的。每一个schema都映射到一个Mongodb的collection（数据库，集合，文档）
 // 并定义了该集合(collection)中的文档(document)的形式。
 var productSchema = new Schema({
   'productId': {type: String},

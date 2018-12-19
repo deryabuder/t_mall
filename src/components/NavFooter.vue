@@ -10,7 +10,7 @@
         </select>
       </div>
       <div class='footer-secondary-nav'>
-        <span>Copyright © 2017 IMooc All Rights Reserved. </span>
+        <span>晋ICP备<a href='http://www.miitbeian.gov.cn/'>18013111</a>号</span>
         <a href='#'>关于我们</a>
         <a href='#'>隐私政策</a>
         <a href='#'>服务条框</a>
@@ -24,4 +24,8 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+.footer-secondary-nav {
+  margin: 10px auto 30px;
+}
+</style>

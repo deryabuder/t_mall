@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-
+// 构造函数，Schema对应的是数据库中集合的结构
 var userSchema = new mongoose.Schema({
   'userId': String,
   'userName': String,
@@ -27,4 +27,5 @@ var userSchema = new mongoose.Schema({
   ]
 })
 
+// 导出模型
 module.exports = mongoose.model('User', userSchema)

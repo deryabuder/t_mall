@@ -31,7 +31,7 @@ export default {
 }
 .bread-wrap a {
   position: relative;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 .bread-wrap a::after {
   position: absolute;

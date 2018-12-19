@@ -17,7 +17,7 @@
   -webkit-transition: all .5s ease-out;
   transition: all .5s ease-out;
 }
-
+/* 当鼠标悬浮在商品上时，添加边框和阴影，并向上移动 */
 .accessory-list > ul > li:hover {
   border-color: #ee7a23;
   -webkit-transform: translateY(-5px);
@@ -299,6 +299,7 @@
   transform: rotate(180deg);
 }
 
+/* 当在价格区间悬浮或是当前价格区间时，向右移动，并添加左边框 */
 .filter .filter-price dd a:hover, .filter .filter-price dd .cur {
   -webkit-transition: padding-left .3s ease-out;
   transition: padding-left .3s ease-out;
@@ -422,7 +423,7 @@
 .filter-nav a.cur, .filter-nav a:hover {
   color: #ee7a23;
 }
-
+/* 添加sortup后旋转180° */
 .filter-nav .sort-up .icon-arrow-short {
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
